@@ -1,0 +1,135 @@
+<!-- views/home-user.handlebars -->
+
+<div class="row mx-auto w-75 py-5">
+    <div class="col-4">
+        <ul class="list-group">
+            {{#each nav}}
+            <li class="list-group-item "> [{{math @index "+" 1}}] <a href="{{this.url}}"> {{this.name}} </a></li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header">Application</div>
+
+            <div class="card-body">
+                <div class="accordion" id="accordionExample">
+                    {{#each evaluation}}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading{{@index}}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse{{@index}}" aria-expanded="false"
+                                aria-controls="collapse{{@index}}">
+                                Evaluation #{{math @index "+" 1}} </button>
+                        </h2>
+                        <div id="collapse{{@index}}" class="accordion-collapse collapse"
+                            aria-labelledby="heading{{@index}}" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+
+                                <form action="post-evaluation/{{this._id}}" method="post">
+
+                                    <span class="list-group-item">
+
+                                        Evaluation ID : {{this._id}}
+                                    </span>
+                                    <span class="list-group-item">
+
+                                        Evaluation Date/Time : {{this.evaluationDateTime}}
+                                    </span>
+
+                                    <span class="list-group-item">
+                                        Judge Id : {{this.judgeID}}
+                                    </span>
+
+
+                                    <span class="list-group-item">
+                                        Application Reference : {{ applicationID.applicationReff}}
+                                    </span>
+
+                                    <span class="list-group-item">
+                                        ApplicationStatus : {{ applicationID.applicationStatus}}
+                                    </span>
+
+                                    <span class="list-group-item">
+                                        Staff ID : {{ applicationID.staffID}}
+
+                                    </span>
+                                    <span class="list-group-item">
+                                        
+                                        submission Date : {{applicationID.submissionDtae }}
+                                    </span>
+
+
+                                     <span class="row list-group-item border-info py-3 d-flex">
+                                        <div class="col-6">
+                                           Feauture
+                                        </div>
+                                        <div class="col-6 ml-3">
+                                            Grade out of 10
+                                        </div>
+
+                                    </span>
+
+                                    <span class="row list-group-item py-3 d-flex">
+                                        
+                                        <div class="col-6">
+                                            Funding : {{applicationID.funding}}
+                                        </div>
+                                        <div class="col-6">
+                                            <input name="funding" value="{{this.markEachElements.[0]}}">
+                                        </div>
+                                        <div class="col-6">
+                                            Ratings : {{applicationID.ratings}}
+                                        </div>
+                                        <div class="col-6">
+                                            <input class="text-align-center" name="ratings"
+                                                value="{{this.markEachElements.[1]}}">
+                                        </div>
+                                        <div class="col-6">
+                                            Number of foreign visitors :
+                                            {{applicationID.numberOfForeignVisitors}}
+                                        </div>
+                                        <div class="col-6">
+                                            <input name="numberOfForeignVisitors" value="{{this.markEachElements.[2]}}">
+                                        </div>
+                                        <div class="col-6">
+                                            Number of local visitors :
+                                            {{applicationID.numberOfLocalVisitors}}
+                                        </div>
+                                        <div class="col-6">
+                                            <input name="numberOfLocalVisitors" value="{{this.markEachElements.[3]}}">
+                                        </div>
+                                        
+
+                                    </span>
+
+                                    <span class="row list-group-item border-info py-3 d-flex">
+                                        <div class="col-6">
+                                            Total marks
+                                        </div>
+                                        <div class="col-6 ml-3">
+                                            {{this.TotalMark}}
+                                        </div>
+
+                                    </span>
+
+                                    <button type="submit" class="my-3">
+                                        Submit
+                                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>

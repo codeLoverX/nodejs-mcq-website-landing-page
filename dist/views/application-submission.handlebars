@@ -1,0 +1,62 @@
+<!-- views/home-user.handlebars -->
+
+<div class="row mx-auto w-75 py-5">
+    <div class="col-4">
+        <ul class="list-group">
+            {{#each nav}}
+            <li class="list-group-item "> [{{math @index "+" 1}}] <a href="{{this.url}}"> {{this.name}} </a></li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header">Application</div>
+            {{#if warning}}
+            <div class="alert alert-danger w-75 mt-5 mx-auto" role="alert">
+                {{warning}}
+            </div>
+            {{/if}}
+
+            {{#if success}}
+            <div class="alert alert-success w-75 mt-5 mx-auto" role="alert">
+                {{success}}
+            </div>
+            {{/if}}
+
+            <div class="card-body">
+                <form action="/application-submission" method="post">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th scope="col">Details</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each application}}
+                            <tr>
+                                <td class="text-capitalize">{{ @key}} </td>
+                                <td>
+                                    {{#if this}}
+                                    <span>{{this}} </span>
+                                    {{else}} <input name="{{@key}}" placeholder="Submit value...">
+                                    {{/if}}
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    {{#if application.programName}}
+
+                    {{else}} 
+                    <button type="submit">Submit</button>
+                    {{/if}}
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>

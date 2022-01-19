@@ -1,0 +1,113 @@
+[
+    {
+        "name": "Patient Registration System",
+        "id": "1231",
+        "description": "This form allows patients to register.",
+        "form": [
+            {
+                "tag": "select",
+                "type": "radio",
+                "name": "title",
+                "label": "Title",
+                "options": [
+                    "Mr",
+                    "Mrs",
+                    "Ms"
+                ]
+            },
+            {
+                "tag": "input",
+                "type": "text",
+                "name": "name",
+                "label": "Name"
+            },
+            {
+                "tag": "input",
+                "type": "date",
+                "name": "dob",
+                "label": "Date of Birth"
+            },
+            {
+                "tag": "input",
+                "type": "radio",
+                "name": "gender",
+                "label": "Gender",
+                "options": [
+                    "Male",
+                    "Female",
+                    "None"
+                ]
+            },
+            {
+                "tag": "input",
+                "type": "phone",
+                "name": "phone",
+                "label": "Phone"
+            }
+        ]
+    },
+    {
+        "name": "Patient History System",
+        "id": "1232",
+        "description": "This form records past history of patients.",
+        "form": [
+            {
+                "tag": "input",
+                "type": "name",
+                "name": "name",
+                "label": "Name"
+            },
+            {
+                "tag": "input",
+                "type": "mail",
+                "name": "mail",
+                "label": "Mail"
+            },
+            {
+                "tag": "input",
+                "type": "checkbox",
+                "name": "history",
+                "label": "Past History",
+                "options": [
+                    "head",
+                    "injury causing loss of consciousness",
+                    "Seizures",
+                    "Ear, nose or throat problems",
+                    "Dental problems",
+                    "Asthma"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Medical release form",
+        "id": "1233",
+        "description": "This form allows patients release from the hospitals.",
+        "form": [
+            {
+                "tag": "input",
+                "type": "number",
+                "name": "daysNumber",
+                "label": "Number of days spent?"
+            },
+            {
+                "tag": "input",
+                "type": "number",
+                "name": "cabinNumber",
+                "label": "Cabin number"
+            },
+            {
+                "tag": "input",
+                "type": "text",
+                "name": "address",
+                "label": "Address"
+            },
+            {
+                "tag": "textArea",
+                "type": "text",
+                "name": "comment",
+                "label": "Comments"
+            }
+        ]
+    }
+]

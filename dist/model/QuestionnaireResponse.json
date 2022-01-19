@@ -1,0 +1,20 @@
+{
+    "1231": {
+        "title": "",
+        "name": "",
+        "dob": "",
+        "gender": "",
+        "phone": null
+    },
+    "1232": {
+        "name": "",
+        "mail": "",
+        "history": []
+    },
+    "1233": {
+        "daysNumber": null,
+        "cabinNumber": null,
+        "address": "",
+        "comment": ""
+    }
+}

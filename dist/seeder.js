@@ -52,7 +52,7 @@ function seeder() {
                 _id: "evaluation1",
                 evaluationDateTime: new Date('2022-1-17'),
                 judgeID: "judge",
-                markEachElements: [0, 10, 10, 0],
+                markEachElements: [0, 0, 0, 0],
                 rank: null,
                 result: "Good work done!",
                 TotalMark: 0,
@@ -73,12 +73,12 @@ function seeder() {
                 signInStatus: "organizer",
                 signUpStatus: "true",
                 userName: "organizer",
-                email: "adila@grad.utm.my",
+                email: "johanna@grad.utm.my",
                 _id: "organizer",
                 // organizer
                 address: "Jalan Tun Abdul Razak, Wadi Hana, 80000 Johor Bahru, Johor,",
                 contact: "+601149818334",
-                fullName: "Dr Adila",
+                fullName: "Dr Johanna",
                 organizerPosition: "President",
                 usertype: "organizer"
             });

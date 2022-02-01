@@ -1,0 +1,193 @@
+<!-- views/home-user.handlebars -->
+
+{{> navbar-after-login }}
+<div class="row justify-content-between no-gutters">
+    {{> drawer }}
+    <div class="col-12 col-md-9">
+        <div class="card">
+            <div class="card-header">Application</div>
+
+            <div class="card-body">
+                <div class="accordion" id="accordionExample">
+                    {{#each evaluation}}
+                    <div class="accordion-item">
+                        <div class="accordion-header pt-2 pl-2 border border-dark">
+                            <span
+                                class="bg-light border border-none d-block collapsed w-100 text-left d-flex justify-content-between"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{@index}}"
+                                aria-expanded="false" aria-controls="collapse{{@index}}">
+                                <p>
+                                    Evaluation #{{math @index "+" 1}}
+                                    <span class="down-arrow ml-3 position-relative" style="top: -5px"> </span>
+                                </p>
+
+                            </span>
+                        </div>
+                        <div id="collapse{{@index}}" class="accordion-collapse collapse"
+                            aria-labelledby="heading{{@index}}" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+
+                                <form action="post-evaluation/{{this._id}}" method="post">
+                                    <div class="pt-3">
+                                        <span class="list-group-item list-group-item-sm">
+                                            Evaluation ID : {{this._id}}
+                                        </span>
+                                        <span class="list-group-item list-group-item-sm">
+                                            Evaluation Date/Time : {{this.evaluationDateTime}}
+                                        </span>
+
+                                        <span class="list-group-item list-group-item-sm">
+                                            Judge Id : {{this.judgeID}}
+                                        </span>
+                                        <span class="list-group-item list-group-item-sm">
+                                            Application Reference : {{ applicationID.applicationReff}}
+                                        </span>
+                                        <span class="list-group-item list-group-item-sm">
+                                            ApplicationStatus : {{ applicationID.applicationStatus}}
+                                        </span>
+
+                                        <span class="list-group-item list-group-item-sm">
+                                            Staff ID : {{ applicationID.staffID}}
+                                        </span>
+                                        <span class="list-group-item list-group-item-sm">
+                                            Submission Date : {{applicationID.submissionDtae }}
+                                        </span>
+                                    </div>
+
+                                    <div class="pt-4 pb-0">
+                                        <span class="timeline-line px-md-5 mb-3" style="margin-top: -20px; !important"
+                                            id="myTab" role="tablist">
+                                            <a class="timeline-circle" onclick="showTabPane(event);" href="#first"></a>
+                                            <a class="timeline-circle" onclick="showTabPane(event);" href="#second"></a>
+                                            <a class="timeline-circle" onclick="showTabPane(event);" href="#third"></a>
+                                        </span>
+                                    </div>
+                                    <div class="tabsCustom" style="margin-top: -15px; !important">
+                                        <div class="border py-md-2 px-1" id="first">
+
+                                            <span class="row list-group-item list-group-item-sm py-3 d-flex">
+                                                {{!-- First --}}
+                                                <div class="col-6">
+                                                    Funding for the facility ?
+                                                    {{applicationID.evaluationPoints.funding}}
+                                                </div>
+                                                <div class="col-6">
+                                                    <input name="funding" value="{{this.markEachElements.[0]}}">
+                                                </div>
+                                                <div class="col-6">
+                                                    Rating for the the facility ?
+                                                    {{applicationID.evaluationPoints.ratings}}
+                                                </div>
+                                                <div class="col-6">
+                                                    <input class="text-align-center" name="ratings"
+                                                        value="{{this.markEachElements.[1]}}">
+                                                </div>
+                                                <div class="col-6">
+                                                    Number of foreign visitors ?
+                                                    {{applicationID.evaluationPoints.numberOfForeignVisitors}}
+                                                </div>
+                                                <div class="col-6">
+                                                    <input name="numberOfForeignVisitors"
+                                                        value="{{this.markEachElements.[2]}}">
+                                                </div>
+                                                <div class="col-6">
+                                                    Number of local visitors ?
+                                                    {{applicationID.evaluationPoints.numberOfLocalVisitors}}
+                                                </div>
+                                                <div class="col-6">
+                                                    <input name="numberOfLocalVisitors"
+                                                        value="{{this.markEachElements.[3]}}">
+                                                </div>
+
+
+                                            </span>
+                                        </div>
+                                        {{!-- Third --}}
+
+                                        <div class="d-none border py-md-2 px-1" id="second">
+                                            <small class="text-bold mb-0" style="text-decoration: underline;"> Rate as :
+                                                "Very Bad"|
+                                                "Bad"| "Ok"| "Good"| "Excellent" </small>
+                                            <span class="row list-group-item list-group-item-sm py-3 d-flex">
+                                                <div class="col-6">
+                                                    Quality of toilet ?
+                                                    {{applicationID.evaluationPoints.toilet}}
+                                                </div>
+                                                <div class="col-6">
+                                                    <input name="toilet" value="{{this.markEachElements.[4]}}">
+                                                </div>
+                                                <div class="col-6">
+                                                    'Quality of plumbing ?
+                                                    {{applicationID.evaluationPoints.plumbing}}
+                                                </div>
+                                                <div class="col-6">
+                                                    <input class="text-align-center" name="plumbing"
+                                                        value="{{this.markEachElements.[5]}}">
+                                                </div>
+                                                <div class="col-6">
+                                                    Rating for accomodation ?
+                                                    {{applicationID.evaluationPoints.accomodation}}
+                                                </div>
+                                                <div class="col-6">
+                                                    <input name="accomodation"
+                                                        value="{{this.markEachElements.[6]}}">
+                                                </div>
+                                            </span>
+                                        </div>
+                                        {{!-- Third --}}
+
+
+                                        <div class="d-none border py-md-2 px-1" id="third">
+                                            <small class="text-bold mb-0" style="text-decoration: underline;"> Rate as :
+                                                "Very Bad"|
+                                                "Bad"| "Ok"| "Good"| "Excellent" </small>
+                                            <span class="row list-group-item list-group-item-sm py-3 d-flex">
+                                                <div class="col-6">
+                                                    Cooperation of staff ?
+                                                    {{applicationID.evaluationPoints.staff}}
+                                                </div>
+                                                <div class="col-6">
+                                                    <input name="staff" value="{{this.markEachElements.[7]}}">
+                                                </div>
+                                                <div class="col-6">
+                                                    Authority of staff ?
+                                                    {{applicationID.evaluationPoints.authority}}
+                                                </div>
+                                                <div class="col-6">
+                                                    <input class="text-align-center" name="authority"
+                                                        value="{{this.markEachElements.[8]}}">
+                                                </div>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <button type="submit" class="my-3">
+                                        Submit
+                                    </button>
+                                    <script>
+                                        function showTabPane(event) {
+                                            let href = event.target.getAttribute('href')
+                                            console.log({ classList: event.target.classList })
+                                            let tabs = document.querySelector('.tabsCustom')
+                                            for (element of Array.from(tabs.children)) {
+                                                if (!element.classList.contains('d-none')) element.classList.add('d-none')
+                                            }
+                                            document.querySelector(href).classList.remove('d-none')
+                                        }
+                                    </script>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>

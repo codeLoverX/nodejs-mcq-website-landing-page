@@ -23,6 +23,12 @@ class ApplicationModel {
             return applications;
         });
     }
+    postApplications(application) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let applications = yield Application_1.ApplicationMongoose.post(application);
+            return applications;
+        });
+    }
 }
 class CompetitionModel {
     // A hypothetically complicated class
@@ -31,6 +37,12 @@ class CompetitionModel {
             let competitions = yield Competition_1.CompetitionMongoose.find({});
             if (competitions === null)
                 competitions = [];
+            return competitions;
+        });
+    }
+    postCompetitions(competition) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let competitions = yield Competition_1.CompetitionMongoose.post(competition);
             return competitions;
         });
     }
@@ -45,19 +57,37 @@ class EvaluationModel {
             return evaluations;
         });
     }
+    postEvaluations(evaluation) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let evaluations = yield Evaluation_1.EvaluationMongoose.post(evaluation);
+            return evaluations;
+        });
+    }
 }
 class Facade {
     // A simplified facade offering the services of subsystems
-    ApplicationModel() {
+    newApplication() {
         // Uses the subsystems method
         return new ApplicationModel().fetchAllApplications();
     }
-    CompetitionModel() {
+    newCompetition() {
         // Uses the subsystems method
         return new CompetitionModel().fetchAllCompetitions();
     }
-    EvaluationModel() {
+    newEvaluation() {
         // Uses the subsystems method
         return new EvaluationModel().fetchAllEvaluations();
+    }
+    createApplication(application) {
+        // Uses the subsystems method
+        return new ApplicationModel().postApplications(application);
+    }
+    createCompetition(competition) {
+        // Uses the subsystems method
+        return new CompetitionModel().postCompetitions(competition);
+    }
+    createEvaluation(evaluation) {
+        // Uses the subsystems method
+        return new EvaluationModel().postEvaluations(evaluation);
     }
 }

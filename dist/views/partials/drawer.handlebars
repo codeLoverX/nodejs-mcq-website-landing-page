@@ -1,0 +1,12 @@
+<div class="d-none d-md-block col-md-3" style="background-color:rgb(250, 240, 189)">
+    <ul class="list-group">
+        {{#each nav}}
+        <li class="list-group-item border border-primary" >
+            <span class="badge badge-primary">
+                {{math @index "+" 1}}
+            </span>
+            <a href="{{this.url}}" style="color: black;"> {{this.name}} </a>
+        </li>
+        {{/each}}
+    </ul>
+</div>

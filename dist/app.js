@@ -51,8 +51,8 @@ app.set('view engine', 'handlebars');
 app.use(methodOverride('_method'));
 const db_1 = require("./db");
 const seeder_1 = require("./seeder");
-const User_1 = require("./schema/User");
-const Application_1 = require("./schema/Application");
+const User_1 = require("./db/User");
+const Application_1 = require("./db/models/Application");
 (0, db_1.connectDB)();
 let auth = (req, res, next) => {
     if (req.session.user)

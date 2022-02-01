@@ -1,0 +1,180 @@
+<!-- views/home-user.handlebars -->
+{{> navbar-after-login }}
+
+<div class="row justify-content-between no-gutters">
+    {{> drawer }}
+
+    <div class="col-12 col-md-9">
+        <div class="card border">
+            <div class="card-header border border-primary">Application</div>
+            {{#if warning}}
+            <div class="alert alert-danger w-75 mt-3 mx-auto" role="alert">
+                {{warning}}
+                <br />
+            </div>
+            <p class="alert text-dark w-75 mx-auto" role="alert">
+                <a href="/application-submission"> Try again clicking this link</a>
+            </p>
+            {{/if}}
+
+            {{#if success}}
+            <div class="alert alert-success w-75 mt-5 mx-auto" role="alert">
+                {{success}}
+            </div>
+            {{/if}}
+
+            <div class="card-body border border-primary">
+                <form action="/application-submission" method="post">
+                    <div class="row">
+                        {{#each application}}
+                        <div class="text-capitalize col-6 col-md-5">{{ @key}} </div>
+                        <div class="col-6 col-md-7">
+                            {{#if this}}
+                            <span>{{this}} </span>
+                            {{else}} <input name="{{@key}}" placeholder="Submit value...">
+                            {{/if}}
+                        </div>
+                        {{/each}}
+
+                    </div>
+
+                    <div class="timeline-line px-md-5 mt-5 mb-3 py-md-2" id="myTab" role="tablist">
+                        <a class="timeline-circle" onclick="showTabPane(event);" href="#first"></a>
+                        <a class="timeline-circle" onclick="showTabPane(event);" href="#second"></a>
+                        <a class="timeline-circle" onclick="showTabPane(event);" href="#third"></a>
+
+                    </div>
+
+                    <div class="tabsCustom">
+                        <div class="border border-primary py-md-2 px-2" id="first">
+                            <div class="row">
+                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.funding}}?</div>
+                                <div class="col-6 col-md-7">
+                                    {{#if evaluationPoints.funding}}
+                                    {{evaluationPoints.funding}}
+                                    {{else}} <input name="funding" placeholder="Submit value...">
+                                    {{/if}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.ratings}}?</div>
+                                <div class="col-6 col-md-7">
+                                    {{#if evaluationPoints.ratings}}
+                                    {{evaluationPoints.ratings}}
+                                    {{else}} <input name="ratings" placeholder="Submit value...">
+                                    {{/if}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.numberOfLocalVisitors}}?</div>
+                                <div class="col-6 col-md-7">
+                                    {{#if evaluationPoints.numberOfLocalVisitors}}
+                                    {{evaluationPoints.numberOfLocalVisitors}}
+                                    {{else}} <input name="numberOfLocalVisitors" placeholder="Submit value...">
+                                    {{/if}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.numberOfForeignVisitors}}?
+                                </div>
+                                <div class="col-6 col-md-7">
+                                    {{#if evaluationPoints.numberOfForeignVisitors}}
+                                    {{evaluationPoints.numberOfForeignVisitors}}
+                                    {{else}} <input name="numberOfForeignVisitors" placeholder="Submit value...">
+                                    {{/if}}
+                                </div>
+                            </div>
+                            {{!--
+                            numberOfLocalVisitors: "Number of local visitors",
+                            funding: "Funding for the facility",
+                            ratings: "Rating for the the facility",
+                            numberOfForeignVisitors: "Number of foreign visitors",
+                            //
+                            toilet: "Quality of toilet (Good/ Very Good/ Excellent)",
+                            plumbing: "Quality of plumbing (Good/ Very Good/ Excellent)",
+                            accomodation: "Quality of accomodation (Good/ Very Good/ Excellent)",
+                            //
+                            staff: "Cooperation of staff (Good/ Very Good/ Excellent)",
+                            authority: "Authority of staff (Good/ Very Good/ Excellent)" --}}
+
+                        </div>
+
+                        <div class="d-none border border-primary  py-md-2 px-2" id="second">
+                            <small class="text-bold mb-0" style="text-decoration: underline;"> Rate as : "Very Bad"|
+                                "Bad"| "Ok"| "Good"| "Excellent" </small>
+                            <div class="row">
+                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.toilet}}?</div>
+                                <div class="col-6 col-md-7">
+                                    {{#if evaluationPoints.toilet}}
+                                    {{evaluationPoints.toilet}}
+                                    {{else}} <input name="toilet" placeholder="Submit value...">
+                                    {{/if}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.plumbing}}?</div>
+                                <div class="col-6 col-md-7">
+                                    {{#if evaluationPoints.plumbing}}
+                                    {{evaluationPoints.plumbing}}
+                                    {{else}} <input name="plumbing" placeholder="Submit value...">
+                                    {{/if}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.accomodation}}?</div>
+                                <div class="col-6 col-md-7">
+                                    {{#if evaluationPoints.accomodation}}
+                                    {{evaluationPoints.accomodation}}
+                                    {{else}} <input name="accomodation" placeholder="Submit value...">
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-none border border-primary  py-md-2 px-2" id="third">
+                            <small class="text-bold mb-0" style="text-decoration: underline;"> Rate as : "Very Bad"|
+                                "Bad"| "Ok"| "Good"| "Excellent" </small>
+                            <div class="row">
+                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.staff}}?</div>
+                                <div class="col-6 col-md-7">
+                                    {{#if evaluationPoints.staff}}
+                                    {{evaluationPoints.staff}}
+                                    {{else}} <input name="staff" placeholder="Submit value...">
+                                    {{/if}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.authority}}?</div>
+                                <div class="col-6 col-md-7">
+                                    {{#if evaluationPoints.authority}}
+                                    {{evaluationPoints.authority}}
+                                    {{else}} <input name="authority" placeholder="Submit value...">
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <script>
+                        function showTabPane(event) {
+                            let href = event.target.getAttribute('href')
+                            console.log({ classList: event.target.classList })
+                            let tabs = document.querySelector('.tabsCustom')
+                            for (element of Array.from(tabs.children)) {
+                                if (!element.classList.contains('d-none')) element.classList.add('d-none')
+                            }
+                            document.querySelector(href).classList.remove('d-none')
+                        }
+                    </script>
+                    {{#if newApplication}}
+                    <button type="submit" class="mx-5 mb-5 mt-4">Submit</button>
+                    {{/if}}
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>

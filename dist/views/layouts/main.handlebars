@@ -5,54 +5,92 @@
 
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.1.3/sketchy/bootstrap.min.css" />
+  <title class="text-primary text-uppercase">
+    GREEN LEAF SYSTEM
+  </title>
+
+  <!-- add icon link -->
+  <link rel="icon" href="/images-bg-removed/logo-only.png" type="image/png">
   <style>
-    a {
-      color: black; 
-      text-decoration: none;
+    button.rounded,
+      {
+      border-radius: 4.3rem !important;
+      padding: 0.4rem 1rem !important;
+    }
+
+    .no-gutters {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .no-gutters>.col,
+    .no-gutters>[class*="col-"] {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    @font-face {
+      font-family: 'Lora';
+      src: url('/css/Lora-Regular.ttf');
+    }
+
+    body {
+      font-family: 'Lora', arial, sans-serif;
+    }
+
+    .timeline-line {
+      /*
+      border-width: 1px 0 0 0;
+       border-color: rgb(17, 0, 0); 
+      border-style: solid;
+      */
+      height: 30px !important;
+      width: 270px;
+      margin: 30px 200px -20px;
+    }
+
+    .timeline-circle {
+      position: relative;
+      top: -15px;
+      left: 10px;
+      margin-left: 10px;
+      border-radius: 50% !important;
+      border: 2px solid green !important;
+      display: inline-block !important;
+      height: 5px !important;
+      padding: 5px;
+    }
+
+    .list-group-item-sm {
+      margin: 3px 0 !important;
+      padding: 3px 20px !important;
+      font-size: 95% !important;
+    }
+
+    .down-arrow {
+      display: inline-block;
+      padding: 4px !important;
+      border-width: 0 2px 2px 0;
+      border-style: solid;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+
+    .down-arrow:hover, .accordion-header:hover {
+      color: #ffc107;
+      font-size: larger;
     }
   </style>
 </head>
 
 <body>
 
-  {{> navbar }}
 
   {{{body}}}
-  {{!--
-  <footer class="page-footer font-small blue pt-4">
-    <div class="container-fluid text-center">
-      <div class="row">
-        <hr class="clearfix w-100 d-md-none pb-3">
-        <div class="col-md-6 mb-md-0 mb-3">
-          <h5 class="text-uppercase">Links</h5>
-          <ul class="list-unstyled">
-            <li><a href="#!">Link 1</a></li>
-            <li><a href="#!">Link 2</a></li>
-            <li><a href="#!">Link 3</a></li>
-            <li><a href="#!">Link 4</a></li>
-          </ul>
-        </div>
-        <div class="col-md-6 mb-md-0 mb-3">
-          <h5 class="text-uppercase">Links</h5>
-          <ul class="list-unstyled">
-            <li><a href="#!">Link 1</a></li>
-            <li><a href="#!">Link 2</a></li>
-            <li><a href="#!">Link 3</a></li>
-            <li><a href="#!">Link 4</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright text-center py-3">© 2018 Copyright:
-      <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
-    </div>
-  </footer> --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Latest compiled and minified JavaScript -->
 </body>
 
 </html>

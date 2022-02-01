@@ -9,7 +9,6 @@
     "@types/uuid": "^8.3.4",
     "bcrypt": "^5.0.1",
     "colors": "^1.4.0",
-    "concurrently": "^6.4.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -32,6 +31,8 @@
   "license": "ISC",
   "devDependencies": {
     "copyfiles": "^2.4.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "concurrently": "^6.4.0"
+
   }
 }

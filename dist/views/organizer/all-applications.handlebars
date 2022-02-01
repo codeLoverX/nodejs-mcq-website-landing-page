@@ -1,0 +1,59 @@
+<!-- views/home-user.handlebars -->
+{{> navbar-after-login }}
+<div class="row justify-content-between no-gutters">
+    {{> drawer }}
+     <div class="col-12 col-md-9">
+        <div class="card">
+            <div class="card-header">Application</div>
+
+            <div class="card-body">
+                <div class="accordion" id="accordionExample">
+                    {{#each application}}
+                    <div class="accordion-item">
+                         <div class="accordion-header pt-2 pl-2 border border-dark">
+                            <span
+                                class="bg-light border border-none d-block collapsed w-100 text-left d-flex justify-content-between"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{@index}}"
+                                aria-expanded="false" aria-controls="collapse{{@index}}">
+                                <p>
+                                    {{this.programName}}
+                                    <span class="down-arrow ml-3 position-relative" style="top: -5px"> </span>
+                                </p>
+
+                            </span>
+                        </div>
+                        
+                        <div id="collapse{{@index}}" class="accordion-collapse collapse"
+                            aria-labelledby="heading{{@index}}" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+
+                                <form action="delete-application/{{this._id}}" method="post">
+
+                                    {{#each this}}
+                                    {{#unless this._id}}
+                                    <span class="list-group-item list-group-item-sm">
+                                        {{ @key}} : {{this}}
+                                    </span>
+                                    {{/unless}}
+                                    {{/each}}
+
+                                    <button type="submit" class="my-3">
+                                        Delete
+                                    </button>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>

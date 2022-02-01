@@ -1,5 +1,7 @@
 export { }
 
+declare module "patterns"
+
 declare global {
     namespace Express {
         interface Request {

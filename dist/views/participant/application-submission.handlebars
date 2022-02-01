@@ -32,9 +32,11 @@
                             {{#if this}}
                             <span>{{this}} </span>
                             {{else}}
-                            {{#if newApplication}}
-                            <input name="programName" placeholder="Submit value...">
-                            {{/if}}
+                                {{#if newApplication}}
+                                <input name="programName" placeholder="Submit value...">
+                                {{else}}
+                                <input name="{{@key}}" placeholder="Submit value...">
+                                {{/if}}
                             {{/if}}
                         </div>
                         {{/each}}

@@ -31,7 +31,10 @@
                         <div class="col-6 col-md-7">
                             {{#if this}}
                             <span>{{this}} </span>
-                            {{else}} <input name="{{@key}}" placeholder="Submit value...">
+                            {{else}}
+                            {{#if newApplication}}
+                            <input name="programName" placeholder="Submit value...">
+                            {{/if}}
                             {{/if}}
                         </div>
                         {{/each}}

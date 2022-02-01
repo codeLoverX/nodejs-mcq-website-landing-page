@@ -103,7 +103,7 @@ module.exports = function (app: Application) {
                 submissionDtae: new Date().toLocaleDateString(),
                 _id: uuidv4(),
                 // more
-                programName: req.body.programName,
+                programName: req.body["Program name"],
                 evaluationPoints: {
                     numberOfLocalVisitors: req.body.numberOfLocalVisitors,
                     funding: req.body.funding,

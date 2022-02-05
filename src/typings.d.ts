@@ -11,6 +11,10 @@ declare global {
                 destroy: () => void
             }
         }
+        
+    }
+    interface MulterRequest extends Express.Request {
+        file: any;
     }
     namespace NodeJS {
         interface ProcessEnv {

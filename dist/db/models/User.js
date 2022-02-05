@@ -5,23 +5,18 @@ const mongoose_1 = require("mongoose");
 const schema = new mongoose_1.Schema({
     passWord: String,
     signInStatus: String,
-    signUpStatus: String,
     userName: String,
-    // organizer
     address: String,
-    contact: String,
-    fullName: String,
-    organizerPosition: String,
     email: String,
-    // judge
     name: String,
+    // organizer
+    contact: String,
+    organizerPosition: String,
+    // judge
+    judgePosition: String,
     // participant
-    fName: String,
-    lName: String,
     PTJType: String,
-    staffAddress: String,
-    StaffEmail: String,
-    StaffPhoneNo: String,
+    PTJName: String,
     _id: String
 });
 const UserMongoose = (0, mongoose_1.model)('User', schema);

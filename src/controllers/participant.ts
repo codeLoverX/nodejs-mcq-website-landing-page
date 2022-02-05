@@ -1,20 +1,28 @@
 import { Application, Request, Response, NextFunction } from "express"
-import { CompetitionMongoose } from "../db/models/Competition";
 import { EvaluationMongoose } from "../db/models/Evaluation";
-import { UserMongoose } from "../db/models/User";
-import { ApplicationInterface, ApplicationMongoose } from "../db/models/Application";
+import { ApplicationMongoose } from "../db/models/Application";
 import { auth } from "../middleware/auth";
 import { keyRenameObject } from "../helpers/keyRename";
 import { formLabel } from "../db/formLables";
-import { taskDate } from "../helpers/dateFormat";
+import { uploadS3 } from "../middleware/fileStorage";
 const { v4: uuidv4 } = require('uuid');
-const methodOverride = require('method-override');
+const aws = require("aws-sdk");
+const { join } = require('path')
+const dotenv = require("dotenv")
+
+const path = join(__dirname, '../env/config.env')
+dotenv.config({ path })
+const s3 = new aws.S3({
+    accessKeyId: process.env.Access_Key_ID,
+    secretAccessKey: process.env.Secret_Access_Key,
+});
 
 module.exports = function (app: Application) {
 
     let nav = [
         { name: "Profile", url: "/home-participant" },
         { name: "Application Submission", url: "/application-submission" },
+        { name: "Application Proof", url: "/proof-participant" },
         { name: "Logout", url: "/logout" }
     ]
 
@@ -30,6 +38,8 @@ module.exports = function (app: Application) {
         });
     });
 
+
+
     app.get('/application-submission', auth, async (req: Request, res: Response, next: NextFunction) => {
         let user = { ...req.session.user }
         let newApplication = false
@@ -39,9 +49,12 @@ module.exports = function (app: Application) {
             if (application === null) {
                 newApplication = true
                 application = new ApplicationMongoose({
-                    applicationStatus: "Not submitted",
-                    // more
-                    programName: null,
+                    proof: null,
+                    staffName: req.session.user.staffName,
+                    staffPTJType: req.session.user.PTJType,
+                    applicationStatus: "Started",
+                    staffID: req.session.user._id,
+                    staffPTJName: req.session.user.PTJName,
                     numberOfLocalVisitors: null,
                     funding: null,
                     ratings: null,
@@ -59,7 +72,10 @@ module.exports = function (app: Application) {
             delete application.__v
             delete application.createdAt
             delete application.updatedAt
+            delete application.staffID
             delete application.evaluationPoints
+            let applicationStatus = "Not rejected"
+            if (application.applicationStatus) applicationStatus = "rejected"
             res.render('participant/application-submission', {
                 application: keyRenameObject(application, 'application'),
                 nav,
@@ -67,6 +83,7 @@ module.exports = function (app: Application) {
                 evaluationPoints,
                 newApplication,
                 formLabel,
+                applicationStatus
             });
         }
 
@@ -84,7 +101,7 @@ module.exports = function (app: Application) {
 
     app.post('/application-submission', auth, async (req: Request, res: Response, next: NextFunction) => {
         try {
-            console.log({filled: req.body.numberOfLocalVisitors.length, nonFilled: req.body.toilet.length, value: req.body.toilet  })
+            console.log({ filled: req.body.numberOfLocalVisitors.length, nonFilled: req.body.toilet.length, value: req.body.toilet })
             if (req.body.numberOfLocalVisitors.length === 0 ||
                 req.body.funding.length === 0 ||
                 req.body.ratings.length === 0 ||
@@ -93,17 +110,19 @@ module.exports = function (app: Application) {
                 req.body.plumbing === 0 ||
                 req.body.accomodation.length === 0 ||
                 req.body.staff.length === 0 ||
-                req.body.authority.length === 0 ) {
-                    throw new Error("Missed one value. Use the timeline and fill all 3 sets of questions!")
+                req.body.authority.length === 0) {
+                throw new Error("Missed one value. Use the timeline and fill all 3 sets of questions!")
             }
             let application = new ApplicationMongoose({
-                applicationReff: req.body.applicationReff,
-                applicationStatus: "Submitted",
+                proof: null,
                 staffID: req.session.user._id,
+                applicationStatus: "Submitted",
+                staffName: req.session.user.name,
+                staffPTJType: req.session.user.PTJType,
+                staffPTJName: req.session.user.PTJName,
                 submissionDtae: new Date().toLocaleDateString(),
                 _id: uuidv4(),
                 // more
-                programName: req.body["Program name"],
                 evaluationPoints: {
                     numberOfLocalVisitors: req.body.numberOfLocalVisitors,
                     funding: req.body.funding,
@@ -121,7 +140,7 @@ module.exports = function (app: Application) {
                 applicationID: application._id,
                 _id: uuidv4(),
                 evaluationDateTime: new Date().toLocaleDateString(),
-                judgeID: "judge",
+                judgeID: null,
                 markEachElements: [0, 0, 0, 0, 0, 0, 0, 0, 0],
                 rank: null,
                 result: "",
@@ -141,6 +160,52 @@ module.exports = function (app: Application) {
                 signInStatus: req.session.user.signInStatus
             });
         }
+    })
+
+    app.get('/proof-participant', auth, async function (req: Request, res: Response, next: NextFunction) {
+        let application = await ApplicationMongoose.findOne({ staffID: req.session.user._id }).lean()
+        try {
+            if (application !== null) {
+                console.log({ application })
+                if (application.proof !== null) {
+
+                    let proof = await s3.getSignedUrl('getObject', {
+                        Bucket: process.env.Bucket_Name,
+                        Key: application.proof,
+                    })
+                    res.render('participant/proof', {
+                        application,
+                        proof,
+                        nav,
+                        signInStatus: req.session.user.signInStatus
+                    });
+                }
+                else {
+                    res.render('participant/proof', {
+                        application,
+                        nav,
+                        signInStatus: req.session.user.signInStatus
+                    });
+                }
+            }
+            else throw new Error("No application submitted yet");
+        }
+        catch (err) {
+            res.render('participant/proof', {
+                warning: err,
+                nav,
+                signInStatus: req.session.user.signInStatus
+            });
+        }
+    });
+
+    app.post('/upload-proof/:id', auth, uploadS3.single('inputFile'), async (req: Request, res: Response, next: NextFunction) => {
+        let file = req.file as Express.MulterS3.File
+        console.log({ file: req.file, body: req.body.inputFile })
+        if (file)
+            await ApplicationMongoose.findOneAndUpdate({ staffID: req.session.user._id }, { proof: file.key })
+        // res.json({ file })
+        res.redirect('/proof-participant')
     })
 
 

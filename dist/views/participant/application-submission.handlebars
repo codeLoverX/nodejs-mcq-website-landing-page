@@ -4,7 +4,7 @@
 <div class="row justify-content-between no-gutters">
     {{> drawer }}
 
-    <div class="col-12 col-md-9">
+    <div class="col-12 col-lg-9">
         <div class="card border">
             <div class="card-header border border-primary">Application</div>
             {{#if warning}}
@@ -27,12 +27,12 @@
                 <form action="/application-submission" method="post">
                     <div class="row">
                         {{#each application}}
-                        <div class="text-capitalize col-6 col-md-5">{{ @key}} </div>
-                        <div class="col-6 col-md-7">
-                            {{#if this}}
-                            <span>{{this}} </span>
+                        <div class="text-capitalize col-12 col-lg-5">{{ @key}} </div>
+                        <div class="col-12 col-lg-7">
+                            {{#if this}}  
+                            <span>  {{this}} </span>
                             {{else}}
-                                <input name="programName" placeholder="Submit value...">
+                             <span>  No proof attached yet </span>
                             {{/if}}
                         </div>
                         {{/each}}
@@ -49,8 +49,8 @@
                     <div class="tabsCustom">
                         <div class="border border-primary py-md-2 px-2" id="first">
                             <div class="row">
-                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.funding}}?</div>
-                                <div class="col-6 col-md-7">
+                                <div class="text-capitalize col-12 col-lg-9 question"> {{formLabel.funding}}</div>
+                                <div class="col-12 col-lg-3 answer">
                                     {{#if evaluationPoints.funding}}
                                     {{evaluationPoints.funding}}
                                     {{else}} <input name="funding" placeholder="Submit value...">
@@ -58,8 +58,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.ratings}}?</div>
-                                <div class="col-6 col-md-7">
+                                <div class="text-capitalize col-12 col-lg-9 question"> {{formLabel.ratings}}</div>
+                                <div class="col-12 col-lg-3 answer">
                                     {{#if evaluationPoints.ratings}}
                                     {{evaluationPoints.ratings}}
                                     {{else}} <input name="ratings" placeholder="Submit value...">
@@ -67,8 +67,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.numberOfLocalVisitors}}?</div>
-                                <div class="col-6 col-md-7">
+                                <div class="text-capitalize col-12 col-lg-9 question question"> {{formLabel.numberOfLocalVisitors}}</div>
+                                <div class="col-12 col-lg-3 answer">
                                     {{#if evaluationPoints.numberOfLocalVisitors}}
                                     {{evaluationPoints.numberOfLocalVisitors}}
                                     {{else}} <input name="numberOfLocalVisitors" placeholder="Submit value...">
@@ -76,36 +76,23 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.numberOfForeignVisitors}}?
+                                <div class="text-capitalize col-12 col-lg-9 question"> {{formLabel.numberOfForeignVisitors}}
                                 </div>
-                                <div class="col-6 col-md-7">
+                                <div class="col-12 col-lg-3 answer">
                                     {{#if evaluationPoints.numberOfForeignVisitors}}
                                     {{evaluationPoints.numberOfForeignVisitors}}
                                     {{else}} <input name="numberOfForeignVisitors" placeholder="Submit value...">
                                     {{/if}}
                                 </div>
                             </div>
-                            {{!--
-                            numberOfLocalVisitors: "Number of local visitors",
-                            funding: "Funding for the facility",
-                            ratings: "Rating for the the facility",
-                            numberOfForeignVisitors: "Number of foreign visitors",
-                            //
-                            toilet: "Quality of toilet (Good/ Very Good/ Excellent)",
-                            plumbing: "Quality of plumbing (Good/ Very Good/ Excellent)",
-                            accomodation: "Quality of accomodation (Good/ Very Good/ Excellent)",
-                            //
-                            staff: "Cooperation of staff (Good/ Very Good/ Excellent)",
-                            authority: "Authority of staff (Good/ Very Good/ Excellent)" --}}
-
                         </div>
 
                         <div class="d-none border border-primary  py-md-2 px-2" id="second">
                             <small class="text-bold mb-0" style="text-decoration: underline;"> Rate as : "Very Bad"|
                                 "Bad"| "Ok"| "Good"| "Excellent" </small>
                             <div class="row">
-                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.toilet}}?</div>
-                                <div class="col-6 col-md-7">
+                                <div class="text-capitalize col-12 col-lg-9 question"> {{formLabel.toilet}}</div>
+                                <div class="col-12 col-lg-3 answer">
                                     {{#if evaluationPoints.toilet}}
                                     {{evaluationPoints.toilet}}
                                     {{else}} <input name="toilet" placeholder="Submit value...">
@@ -113,8 +100,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.plumbing}}?</div>
-                                <div class="col-6 col-md-7">
+                                <div class="text-capitalize col-12 col-lg-9 question"> {{formLabel.plumbing}}</div>
+                                <div class="col-12 col-lg-3 answer">
                                     {{#if evaluationPoints.plumbing}}
                                     {{evaluationPoints.plumbing}}
                                     {{else}} <input name="plumbing" placeholder="Submit value...">
@@ -122,8 +109,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.accomodation}}?</div>
-                                <div class="col-6 col-md-7">
+                                <div class="text-capitalize col-12 col-lg-9 question"> {{formLabel.accomodation}}</div>
+                                <div class="col-12 col-lg-3 answer">
                                     {{#if evaluationPoints.accomodation}}
                                     {{evaluationPoints.accomodation}}
                                     {{else}} <input name="accomodation" placeholder="Submit value...">
@@ -136,8 +123,8 @@
                             <small class="text-bold mb-0" style="text-decoration: underline;"> Rate as : "Very Bad"|
                                 "Bad"| "Ok"| "Good"| "Excellent" </small>
                             <div class="row">
-                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.staff}}?</div>
-                                <div class="col-6 col-md-7">
+                                <div class="text-capitalize col-12 col-lg-9 question"> {{formLabel.staff}}</div>
+                                <div class="col-12 col-lg-3 answer">
                                     {{#if evaluationPoints.staff}}
                                     {{evaluationPoints.staff}}
                                     {{else}} <input name="staff" placeholder="Submit value...">
@@ -145,8 +132,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="text-capitalize col-6 col-md-5"> {{formLabel.authority}}?</div>
-                                <div class="col-6 col-md-7">
+                                <div class="text-capitalize col-12 col-lg-9 question"> {{formLabel.authority}}</div>
+                                <div class="col-12 col-lg-3 answer">
                                     {{#if evaluationPoints.authority}}
                                     {{evaluationPoints.authority}}
                                     {{else}} <input name="authority" placeholder="Submit value...">
@@ -167,6 +154,7 @@
                             }
                             document.querySelector(href).classList.remove('d-none')
                         }
+x                     
                     </script>
                     {{#if newApplication}}
                     <button type="submit" class="mx-5 mb-5 mt-4">Submit</button>

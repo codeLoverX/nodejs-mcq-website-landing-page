@@ -3,51 +3,39 @@ import { Schema, model, Document, PopulatedDoc } from 'mongoose';
 // not written in the docs but must be written!!!
 // ** extends Document **
 interface UserInterface extends Document {
-    passWord: string;
-	signInStatus: string;
-	signUpStatus: string;
-	userName: string;
-
-    // organizer
-	address: string;
-	contact: string;
-	fullName: string;
-	organizerPosition: string;
-	email: string;
-	
+	passWord: String,
+	signInStatus: String,
+	userName: String,
+	address: String,
+	email: String,
+	name: String,
+	// organizer
+	contact: String,
+	organizerPosition: String,
     // judge
-	name: string;
-    // participant
-	fName: string;
-	lName: string;
-	PTJType: string;
-	staffAddress: string;
-	StaffEmail: string;
-	StaffPhoneNo: string;
-	_id: string;
+	judgePosition: String,
+	// participant
+	PTJType: String,
+	PTJName: String,
+	_id: String
 
 }
 
 const schema = new Schema<UserInterface>({
     passWord: String,
 	signInStatus: String,
-	signUpStatus: String,
 	userName: String,
-    // organizer
 	address: String,
-	contact: String,
-	fullName: String,
-	organizerPosition: String,
 	email: String,
-    // judge
 	name: String,
-    // participant
-	fName: String,
-	lName: String,
+	// organizer
+	contact: String,
+	organizerPosition: String,
+    // judge
+	judgePosition: String,
+	// participant
 	PTJType: String,
-	staffAddress: String,
-	StaffEmail: String,
-	StaffPhoneNo: String,
+	PTJName: String,
 	_id: String
 })
 

@@ -11,35 +11,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.seeder = void 0;
 const samples_1 = require("./samples");
-const Competition_1 = require("./models/Competition");
 const Evaluation_1 = require("./models/Evaluation");
 const User_1 = require("./models/User");
 const Application_1 = require("./models/Application");
 function seeder() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield Competition_1.CompetitionMongoose.deleteMany();
             yield Evaluation_1.EvaluationMongoose.deleteMany();
             yield User_1.UserMongoose.deleteMany();
             yield Application_1.ApplicationMongoose.deleteMany();
         }
         catch (err) {
-            return { failed: true };
+            return { failed: false };
         }
         try {
-            let { application, competition, evaluation, participant1, participant2, judge, organizer } = (0, samples_1.default)();
-            // application1._id="application1"
-            yield competition.save();
-            yield evaluation.save();
-            yield participant1.save();
-            yield participant2.save();
-            yield judge.save();
-            yield organizer.save();
-            yield application.save();
-            return { application, competition, evaluation, participant1, participant2, judge, organizer };
+            let { application, evaluation, participant, judge, organizer } = yield (0, samples_1.default)();
+            for (let currParticipant of participant)
+                yield currParticipant.save();
+            for (let currJudge of judge)
+                yield currJudge.save();
+            for (let currOrganizer of organizer)
+                yield currOrganizer.save();
+            for (let currApplication of application)
+                yield currApplication.save();
+            for (let currEvaluation of evaluation)
+                yield currEvaluation.save();
+            return { application, participant, judge, organizer, evaluation };
         }
         catch (err) {
-            return { failed: true };
+            return { failed: true, one: 2, err };
         }
     });
 }

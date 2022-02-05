@@ -9,8 +9,9 @@ const organizerController = require('./controllers/organizer')
 const participantController = require('./controllers/participant')
 const dotenv = require('dotenv');
 const session = require('express-session');
+
 var exphbs = require('express-handlebars');
-const {join} = require("path")
+const { join } = require("path")
 dotenv.config({ path: './env/config.env' })
 const app: Application = express()
 app.use(express.json())
@@ -20,6 +21,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
 app.set('view engine', 'handlebars');
 app.set('views', './dist/views');
 app.engine('handlebars', exphbs({
@@ -31,7 +33,7 @@ app.engine('handlebars', exphbs({
 app.engine('handlebars', exphbs({
     helpers: {
         math: addPlusToHandleBars,
-        
+        json: (content: string) => JSON.stringify(content)
     }
 }));
 
@@ -45,6 +47,7 @@ judgeController(app);
 connectDB()
 
 app.listen(process.env.PORT || 5000, function () {
+    console.log("Started")
 })
 
 module.exports = app;

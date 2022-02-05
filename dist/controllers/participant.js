@@ -14,12 +14,22 @@ const Application_1 = require("../db/models/Application");
 const auth_1 = require("../middleware/auth");
 const keyRename_1 = require("../helpers/keyRename");
 const formLables_1 = require("../db/formLables");
+const fileStorage_1 = require("../middleware/fileStorage");
 const { v4: uuidv4 } = require('uuid');
-const methodOverride = require('method-override');
+const aws = require("aws-sdk");
+const { join } = require('path');
+const dotenv = require("dotenv");
+const path = join(__dirname, '../env/config.env');
+dotenv.config({ path });
+const s3 = new aws.S3({
+    accessKeyId: process.env.Access_Key_ID,
+    secretAccessKey: process.env.Secret_Access_Key,
+});
 module.exports = function (app) {
     let nav = [
         { name: "Profile", url: "/home-participant" },
         { name: "Application Submission", url: "/application-submission" },
+        { name: "Application Proof", url: "/proof-participant" },
         { name: "Logout", url: "/logout" }
     ];
     app.get('/home-participant', auth_1.auth, function (req, res, next) {
@@ -41,9 +51,12 @@ module.exports = function (app) {
             if (application === null) {
                 newApplication = true;
                 application = new Application_1.ApplicationMongoose({
-                    applicationStatus: "Not submitted",
-                    // more
-                    programName: null,
+                    proof: null,
+                    staffName: req.session.user.staffName,
+                    staffPTJType: req.session.user.PTJType,
+                    applicationStatus: "Started",
+                    staffID: req.session.user._id,
+                    staffPTJName: req.session.user.PTJName,
                     numberOfLocalVisitors: null,
                     funding: null,
                     ratings: null,
@@ -60,7 +73,11 @@ module.exports = function (app) {
             delete application.__v;
             delete application.createdAt;
             delete application.updatedAt;
+            delete application.staffID;
             delete application.evaluationPoints;
+            let applicationStatus = "Not rejected";
+            if (application.applicationStatus)
+                applicationStatus = "rejected";
             res.render('participant/application-submission', {
                 application: (0, keyRename_1.keyRenameObject)(application, 'application'),
                 nav,
@@ -68,6 +85,7 @@ module.exports = function (app) {
                 evaluationPoints,
                 newApplication,
                 formLabel: formLables_1.formLabel,
+                applicationStatus
             });
         }
         catch (err) {
@@ -94,13 +112,15 @@ module.exports = function (app) {
                 throw new Error("Missed one value. Use the timeline and fill all 3 sets of questions!");
             }
             let application = new Application_1.ApplicationMongoose({
-                applicationReff: req.body.applicationReff,
-                applicationStatus: "Submitted",
+                proof: null,
                 staffID: req.session.user._id,
+                applicationStatus: "Submitted",
+                staffName: req.session.user.name,
+                staffPTJType: req.session.user.PTJType,
+                staffPTJName: req.session.user.PTJName,
                 submissionDtae: new Date().toLocaleDateString(),
                 _id: uuidv4(),
                 // more
-                programName: req.body.programName,
                 evaluationPoints: {
                     numberOfLocalVisitors: req.body.numberOfLocalVisitors,
                     funding: req.body.funding,
@@ -118,7 +138,7 @@ module.exports = function (app) {
                 applicationID: application._id,
                 _id: uuidv4(),
                 evaluationDateTime: new Date().toLocaleDateString(),
-                judgeID: "judge",
+                judgeID: null,
                 markEachElements: [0, 0, 0, 0, 0, 0, 0, 0, 0],
                 rank: null,
                 result: "",
@@ -137,5 +157,51 @@ module.exports = function (app) {
                 signInStatus: req.session.user.signInStatus
             });
         }
+    }));
+    app.get('/proof-participant', auth_1.auth, function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let application = yield Application_1.ApplicationMongoose.findOne({ staffID: req.session.user._id }).lean();
+            try {
+                if (application !== null) {
+                    console.log({ application });
+                    if (application.proof !== null) {
+                        let proof = yield s3.getSignedUrl('getObject', {
+                            Bucket: process.env.Bucket_Name,
+                            Key: application.proof,
+                        });
+                        res.render('participant/proof', {
+                            application,
+                            proof,
+                            nav,
+                            signInStatus: req.session.user.signInStatus
+                        });
+                    }
+                    else {
+                        res.render('participant/proof', {
+                            application,
+                            nav,
+                            signInStatus: req.session.user.signInStatus
+                        });
+                    }
+                }
+                else
+                    throw new Error("No application submitted yet");
+            }
+            catch (err) {
+                res.render('participant/proof', {
+                    warning: err,
+                    nav,
+                    signInStatus: req.session.user.signInStatus
+                });
+            }
+        });
+    });
+    app.post('/upload-proof/:id', auth_1.auth, fileStorage_1.uploadS3.single('inputFile'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+        let file = req.file;
+        console.log({ file: req.file, body: req.body.inputFile });
+        if (file)
+            yield Application_1.ApplicationMongoose.findOneAndUpdate({ staffID: req.session.user._id }, { proof: file.key });
+        // res.json({ file })
+        res.redirect('/proof-participant');
     }));
 };

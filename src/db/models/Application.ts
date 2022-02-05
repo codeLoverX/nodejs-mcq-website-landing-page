@@ -2,10 +2,10 @@ import { Schema, model, Document, PopulatedDoc } from 'mongoose'
 import { UserInterface } from './User';
 
 interface evaluationPoints {
-    numberOfLocalVisitors: number,
-    funding: number,
-    ratings: number,
-    numberOfForeignVisitors: number,
+    numberOfLocalVisitors: string,
+    funding: string,
+    ratings: string,
+    numberOfForeignVisitors: string,
     toilet: string,
     plumbing: string,
     accomodation: string,
@@ -26,38 +26,40 @@ interface evaluationPoints {
 // authority: "Authority of staff (Good/ Very Good/ Excellent)"
 
 interface ApplicationInterface extends Document {
-
-    applicationReff: string,
+    staffPTJName: string,
     applicationStatus: string,
-    staffID: string,
-    submissionDtae: Date
+    staffName: string,
+    staffPTJType: string,
+    submissionDtae: Date,
+    staffID?: String,
     _id: string,
-    programName: string;
     evaluationPoints?: evaluationPoints;
     createdAt?: Date,
-    updatedAt?: Date
+    updatedAt?: Date,
+    proof: String
 }
 
 const ApplicationSchema = new Schema<ApplicationInterface>({
 
     staffID: String,
-    applicationReff: String,
+    staffPTJName: String,
     applicationStatus: String,
     submissionDtae: Date,
+    staffName: String,
+    staffPTJType: String,
     _id: String,
     evaluationPoints: {
-        numberOfLocalVisitors: Number,
-        funding: Number,
-        ratings: Number,
-        numberOfForeignVisitors: Number,
+        numberOfLocalVisitors: String,
+        funding: String,
+        ratings: String,
+        numberOfForeignVisitors: String,
         toilet: String,
         plumbing: String,
         accomodation: String,
         staff: String,
         authority: String,
     },
-    programName: String,
-
+    proof: String
 },
     // The strict option, (enabled by default), ensures that values passed to our model constructor that were not 
     //  specified in our schema do not get saved to the db.

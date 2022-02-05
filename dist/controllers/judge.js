@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Evaluation_1 = require("../db/models/Evaluation");
 const Application_1 = require("../db/models/Application");
 const auth_1 = require("../middleware/auth");
-const methodOverride = require('method-override');
 const keyRename_1 = require("../helpers/keyRename");
 const formLables_1 = require("../db/formLables");
 module.exports = function (app) {
@@ -32,7 +31,7 @@ module.exports = function (app) {
     });
     app.get('/all-applications-judge', auth_1.auth, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
         let application = yield Application_1.ApplicationMongoose.find({}).lean();
-        let evaluation = yield Evaluation_1.EvaluationMongoose.find({}).populate('applicationID').lean();
+        let evaluation = yield Evaluation_1.EvaluationMongoose.find({ judgeID: req.session.user._id }).populate('applicationID').lean();
         // res.json({evaluation})
         for (let i = 0; i < application.length; i++) {
             application[i].formLabel = formLables_1.formLabel;
@@ -50,24 +49,6 @@ module.exports = function (app) {
             formLabel: formLables_1.formLabel
         });
     }));
-    app.get('/get-applications-judge', auth_1.auth, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-        let user = Object.assign({}, req.session.user);
-        let usertype = "";
-        if (user.signInStatus === "judge") {
-            usertype = "judge";
-        }
-        else if (user.signInStatus === "organizer") {
-            usertype = "organizer";
-        }
-        let application = yield Application_1.ApplicationMongoose.find({});
-        res.render('judge/all-applications', {
-            usertype,
-            application: (0, keyRename_1.keyRenameObject)(application, 'application'),
-            nav,
-            signInStatus: req.session.user.signInStatus,
-            formLabel: formLables_1.formLabel
-        });
-    }));
     // deleteApplication
     app.post('/post-evaluation/:id', auth_1.auth, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
         let funding = parseFloat(req.body.funding);
@@ -80,6 +61,7 @@ module.exports = function (app) {
         let staff = parseFloat(req.body.staff);
         let authority = parseFloat(req.body.authority);
         let evaluation = yield Evaluation_1.EvaluationMongoose.findByIdAndUpdate(req.params.id, {
+            applicationStatus: 'Submitted',
             markEachElements: [funding, ratings, numberOfForeignVisitors, numberOfLocalVisitors,
                 toilet, accomodation, plumbing,
                 staff, authority

@@ -14,11 +14,7 @@ let user = {
     // judge
     name: "Name",
     // participant
-    fName: "First name",
-    lName: "Last name",
     PTJType: "PTJ type",
-    staffAddress: "Staff address",
-    StaffEmail: "Staff email",
     StaffPhoneNo: "Staff phone number",
 };
 exports.user = user;
@@ -27,23 +23,19 @@ let competition = {
     endDate: "End date",
     invitation: "Invitation link",
     programID: "Program ID",
-    programName: "Program name",
     startDate: "Start date",
 };
 exports.competition = competition;
 let application = {
-    _id: 'Application ID',
-    applicationReff: "Application reference",
+    _id: 'ID',
     applicationID: "Application ID",
     applicationStatus: "Application status",
+    staffName: "Staff Name",
     staffID: "Staff ID",
+    staffPTJType: "Staff PTJ Type",
+    staffPTJName: "Staff PTJ Name",
+    proof: "Proof",
     submissionDtae: "Submission date",
-    programName: "Program name",
-    // Properties
-    numberOfLocalVisitors: "Number of local visitors",
-    funding: "Funding",
-    ratings: "Ratings",
-    numberOfForeignVisitors: "Number of foreign visitors",
     // Properties
     createdAt: "Created at",
     updatedAt: "Updated at"
@@ -84,14 +76,8 @@ function keyRenameObject(object, nameOfObject) {
         delete object[key];
         object[keyReplaced] = temp;
         // replacing dates
-        if (typeof object[key] === 'string') {
-            try {
-                let date = new Date(object[key]);
-                object[key] = object[key].toLocaleDateString();
-            }
-            catch (_a) { }
-        }
     }
+    console.log({ [nameOfObject]: object });
     return object;
 }
 exports.keyRenameObject = keyRenameObject;

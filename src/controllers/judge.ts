@@ -1,10 +1,7 @@
 import { Application, Request, Response, NextFunction } from "express"
-import { CompetitionMongoose } from "../db/models/Competition";
 import { EvaluationMongoose } from "../db/models/Evaluation";
-import { UserMongoose } from "../db/models/User";
 import { ApplicationInterface, ApplicationMongoose } from "../db/models/Application";
 import { auth } from "../middleware/auth";
-const methodOverride = require('method-override');
 import { keyRenameObject } from '../helpers/keyRename'
 import { formLabel } from "../db/formLables";
 
@@ -28,8 +25,9 @@ module.exports = function (app: Application) {
 
 
     app.get('/all-applications-judge', auth, async (req: Request, res: Response, next: NextFunction) => {
+        
         let application: Array< ApplicationInterface & {formLabel: typeof formLabel} >  = await ApplicationMongoose.find({}).lean()
-        let evaluation = await EvaluationMongoose.find({}).populate('applicationID').lean()
+        let evaluation = await EvaluationMongoose.find({judgeID: req.session.user._id}).populate('applicationID').lean()
         // res.json({evaluation})
         for (let i=0; i < application.length; i++) {
             application[i].formLabel = formLabel
@@ -49,22 +47,6 @@ module.exports = function (app: Application) {
     });
 
 
-    app.get('/get-applications-judge', auth, async (req: Request, res: Response, next: NextFunction) => {
-        let user = { ...req.session.user }
-        let usertype = ""
-        if (user.signInStatus === "judge") { usertype = "judge"; }
-        else if (user.signInStatus === "organizer") { usertype = "organizer"; }
-        let application = await ApplicationMongoose.find({})
-
-        res.render('judge/all-applications', {
-            usertype,
-            application: keyRenameObject(application, 'application'),
-            nav,
-            signInStatus: req.session.user.signInStatus,
-            formLabel
-        });
-    });
-
     // deleteApplication
     app.post('/post-evaluation/:id', auth, async (req: Request, res: Response, next: NextFunction) => {
         let funding = parseFloat(req.body.funding)
@@ -78,6 +60,7 @@ module.exports = function (app: Application) {
         let authority = parseFloat(req.body.authority)
 
         let evaluation = await EvaluationMongoose.findByIdAndUpdate(req.params.id, {
+            applicationStatus: 'Submitted',
             markEachElements: [funding, ratings, numberOfForeignVisitors, numberOfLocalVisitors,
                 toilet, accomodation, plumbing, 
                 staff, authority

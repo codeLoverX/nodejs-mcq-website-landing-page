@@ -1,0 +1,176 @@
+<!-- views/login.handlebars -->
+{{> navbar }}
+
+<div class="mx-auto pt-5 ">
+
+    {{!-- Hero --}}
+    <div class="px-4 pb-5 my-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/images-bg-removed/logo-only.png" alt="" width="107" height="88">
+        <h5 class="text-secondary text-uppercase font-weight-bold">Our Green Leaf System application</h5>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Quickly design and customize your application with Green Leaf Systems. If your
+                application gets accepted by the organizers,
+                our judges will judge and evaluate your application.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a type="button" class="btn btn-primary btn-lg px-4 gap-3" href="#feautures">Feautures</a>
+                <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="#about">About us</a>
+            </div>
+        </div>
+    </div>
+
+    {{!-- --}}
+
+    <div class=" bg-gray-light pb-3 mb-3 text-center" id="feautures">
+        <h3 class="py-5 text-secondary border-light text-center text-uppercase font-weight-bold"> Feautures</h3>
+
+        <div class="w-50 mx-auto bg-gray-light">
+            <div class="card mb-4 rounded-3 bg-gray-light ">
+                <div class="card-header py-3  border-light text-secondary ">
+                    <h4 class="my-0 fw-normal">Participant</h4>
+                </div>
+                <div class="card-body">
+
+                    <p>Submit your application here!</p>
+
+                    <p><a class="btn btn-primary text-white" href="/login">Login</a></p>
+                </div>
+            </div>
+
+            <div class="card mb-4 rounded-3 bg-gray-light">
+                <div class="card-header border-light py-3  text-secondary ">
+                    <h4 class="my-0 fw-normal">Judge</h4>
+                </div>
+                <div class="card-body">
+
+
+                    <p>Evaluate submiited application!</p>
+
+                    <p><a class="btn btn-primary text-white" href="/login-demo">View demo</a></p>
+                </div>
+            </div>
+
+            <div class="card mb-4 rounded-3 bg-gray-light">
+                <div class="card-header  py-3 border-light text-secondary ">
+                    <h4 class="my-0 fw-normal">Organiser</h4>
+                </div>
+                <div class="card-body">
+
+                    <p>Manage the applications and assign to judges!</p>
+
+                    <p><a class="btn btn-primary text-white" href="/signup">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{!-- --}}
+
+    <h3 class="pt-5 pb-3 text-secondary text-center text-uppercase font-weight-bold"> About </h3>
+
+
+    <div class="row mb-2 px-5 text-center w-75 mx-auto d-flex justify-content-center" id="about">
+        <div class="col-12 col-lg-4">
+            <div class="card mb-4 rounded-3  border-light">
+                <div class="card-header py-3 bg-light text-secondary  border-light">
+                    <h4 class="my-0 fw-normal">Participant</h4>
+                </div>
+                <div class="card-body">
+                    <img class="rounded-circle"
+                        style="width: 150px; height: 150px; outline-offset: 5px; outline: 1px solid goldenrod;"
+                        src="/images-normal/participants.png">
+                    </img>
+
+                    <h2></h2>
+                    <p>Submit your application here!</p>
+
+                    <p><a class="btn btn-primary text-white" href="/login">Login</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <div class="card mb-4 rounded-3  border-light ">
+                <div class="card-header py-3 bg-light text-secondary  border-light">
+                    <h4 class="my-0 fw-normal">Judge</h4>
+                </div>
+                <div class="card-body">
+                    <img class="rounded-circle"
+                        style="width: 150px; height: 150px; outline-offset: 5px; outline: 1px solid goldenrod;"
+                        src="/images-normal/judge.jpg">
+                    </img>
+
+                    <h2></h2>
+                    <p>Evaluate submiited application!</p>
+
+                    <p><a class="btn btn-primary text-white" href="/login-demo">View demo</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-4">
+            <div class="card mb-4 rounded-3 border-light">
+                <div class="card-header bg-light py-3 text-secondary border-light">
+                    <h4 class="my-0 fw-normal">Organiser</h4>
+                </div>
+                <div class="card-body">
+                    <img class="rounded-circle"
+                        style="width: 150px; height: 150px; outline-offset: 5px; outline: 1px solid goldenrod;"
+                        src="/images-normal/organiser.jfif">
+                    </img>
+
+                    <h2></h2>
+                    <p>Manage the applications and assign to judges!</p>
+
+                    <p><a class="btn btn-primary text-white" href="/signup">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{!-- <div class="row mb-5 px-5 text-center w-75 mx-auto d-flex justify-content-center" id="about2">
+        <div class="col-lg-2"></div>
+        <div class="col-12 col-lg-4">
+            <div class="card mb-4 rounded-3  border-light">
+                <div class="card-header py-3 bg-light text-secondary  border-light">
+                    <h4 class="my-0 fw-normal">Participant</h4>
+                </div>
+                <div class="card-body">
+                    <img class="rounded-circle"
+                        style="width: 150px; height: 150px; outline-offset: 5px; outline: 1px solid goldenrod;"
+                        src="/images-normal/participants.png">
+                    </img>
+
+                    <h2></h2>
+                    <p>Submit your application here!</p>
+
+                    <p><a class="btn btn-primary text-white" href="/login">Login</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <div class="card mb-4 rounded-3  border-light ">
+                <div class="card-header py-3 bg-light text-secondary  border-light">
+                    <h4 class="my-0 fw-normal">Judge</h4>
+                </div>
+                <div class="card-body">
+                    <img class="rounded-circle"
+                        style="width: 150px; height: 150px; outline-offset: 5px; outline: 1px solid goldenrod;"
+                        src="/images-normal/judge.jpg">
+                    </img>
+
+                    <h2></h2>
+                    <p>Evaluate submiited application!</p>
+
+                    <p><a class="btn btn-primary text-white" href="/login-demo">View demo</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2"></div>
+
+
+    </div> --}}
+</div>
+
+{{> footer }}

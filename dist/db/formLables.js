@@ -2,15 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.formLabel = void 0;
 exports.formLabel = {
-    numberOfLocalVisitors: "Number of local visitors",
-    funding: "Funding for the facility",
-    ratings: "Rating for the the facility",
-    numberOfForeignVisitors: "Number of foreign visitors",
+    //
+    numberOfLocalVisitors: "Does your PTJ develop a disaster prevention plan in collaboration between universities and local entities",
+    funding: "UTM's Sustainability Policy must be taken into account in PTJ planning Does PTJ/Office/Unit/Division take into account UTM's sustainability policy",
+    ratings: "Does your PTJ provide incentives for living laboratory sustainability initiatives",
+    numberOfForeignVisitors: "Does the PTJ provide initiatives for sustainability programs / research and innovation with the community",
     // 
-    toilet: "Quality of toilet",
-    plumbing: "Quality of plumbing",
-    accomodation: "Quality of accomodation",
+    toilet: "Rate the quality of toilet in your PTJ",
+    plumbing: "Rate the quality of plumbing in your PTJ",
+    accomodation: "Rate the quality of accomodation in your PTJ",
     // 
-    staff: "Cooperation of staff",
-    authority: "Authority of staff"
+    staff: "Rate the quality of furniture in your PTJ",
+    authority: "Rate the quality of furnishings (ceilings/floor/paint) in your PTJ"
 };

@@ -7,7 +7,6 @@ interface CompetitionInterface {
 	endDate: Date;
 	invitation: string;
 	programID: string;
-	programName: string;
 	startDate: Date;
 	_id: string
 }
@@ -20,7 +19,6 @@ const CompetitionSchema = new Schema<CompetitionInterface>({
 	endDate: {type: Date, get: taskDate},
 	invitation: String,
 	programID: String,
-	programName: String,
 	startDate: {type: Date, get: taskDate},
 	
 

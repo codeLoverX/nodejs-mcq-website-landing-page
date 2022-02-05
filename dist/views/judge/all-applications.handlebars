@@ -39,9 +39,7 @@
                                         <span class="list-group-item list-group-item-sm">
                                             Judge Id : {{this.judgeID}}
                                         </span>
-                                        <span class="list-group-item list-group-item-sm">
-                                            Application Reference : {{ applicationID.applicationReff}}
-                                        </span>
+
                                         <span class="list-group-item list-group-item-sm">
                                             ApplicationStatus : {{ applicationID.applicationStatus}}
                                         </span>
@@ -65,36 +63,50 @@
                                     <div class="tabsCustom" style="margin-top: -15px; !important">
                                         <div class="border py-md-2 px-1" id="first">
 
-                                            <span class="row list-group-item list-group-item-sm py-3 d-flex">
+                                            <span class="row list-group-item list-group-item-sm-2 pt-5 d-flex">
                                                 {{!-- First --}}
-                                                <div class="col-6">
-                                                    Funding for the facility ?
-                                                    {{applicationID.evaluationPoints.funding}}
+                                                <div class="col-6 my-2">
+                                                    UTM's Sustainability Policy must be taken into account in PTJ
+                                                    planning. Does PTJ/Office/Unit/Division take into account UTM's
+                                                    sustainability policy?
+                                                    <span
+                                                        class="answer-2 border border-primary mx-2 p-1">{{applicationID.evaluationPoints.funding}}
+                                                    </span>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-6 my-2">
                                                     <input name="funding" value="{{this.markEachElements.[0]}}">
                                                 </div>
-                                                <div class="col-6">
-                                                    Rating for the the facility ?
-                                                    {{applicationID.evaluationPoints.ratings}}
+                                                <div class="col-6 my-2">
+                                                    Does your PTJ provide incentives for living laboratory
+                                                    sustainability initiatives?
+                                                    <span
+                                                        class="answer-2 border border-primary mx-2 p-1">{{applicationID.evaluationPoints.ratings}}
+                                                    </span>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-6 my-2">
                                                     <input class="text-align-center" name="ratings"
                                                         value="{{this.markEachElements.[1]}}">
                                                 </div>
-                                                <div class="col-6">
-                                                    Number of foreign visitors ?
-                                                    {{applicationID.evaluationPoints.numberOfForeignVisitors}}
+                                                <div class="col-6 my-2">
+                                                    Does the PTJ provide initiatives for
+                                                    sustainability programs / research and innovation with the
+                                                    community?
+                                                    <span
+                                                        class="answer-2 border border-primary mx-2 p-1">{{applicationID.evaluationPoints.numberOfForeignVisitors}}
+                                                    </span>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-6 my-2">
                                                     <input name="numberOfForeignVisitors"
                                                         value="{{this.markEachElements.[2]}}">
                                                 </div>
-                                                <div class="col-6">
-                                                    Number of local visitors ?
-                                                    {{applicationID.evaluationPoints.numberOfLocalVisitors}}
+                                                <div class="col-6 my-2">
+                                                    Does your PTJ develop a disaster prevention plan in
+                                                    collaboration between universities and local entities?
+                                                    <span
+                                                        class="answer-2 border border-primary mx-2 p-1">{{applicationID.evaluationPoints.numberOfLocalVisitors}}
+                                                    </span>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-6 my-2">
                                                     <input name="numberOfLocalVisitors"
                                                         value="{{this.markEachElements.[3]}}">
                                                 </div>
@@ -103,34 +115,38 @@
                                             </span>
                                         </div>
                                         {{!-- Third --}}
-
                                         <div class="d-none border py-md-2 px-1" id="second">
                                             <small class="text-bold mb-0" style="text-decoration: underline;"> Rate as :
                                                 "Very Bad"|
                                                 "Bad"| "Ok"| "Good"| "Excellent" </small>
-                                            <span class="row list-group-item list-group-item-sm py-3 d-flex">
-                                                <div class="col-6">
-                                                    Quality of toilet ?
-                                                    {{applicationID.evaluationPoints.toilet}}
+                                            <span class="row list-group-item list-group-item-sm-2 pt-5 d-flex">
+                                                <div class="col-6 my-2">
+                                                    Rate the quality of toilet in your PTJ.
+                                                    <span
+                                                        class="answer-2 border border-primary mx-2 p-1">{{applicationID.evaluationPoints.toilet}}
+                                                    </span>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-6 my-2">
                                                     <input name="toilet" value="{{this.markEachElements.[4]}}">
                                                 </div>
-                                                <div class="col-6">
-                                                    'Quality of plumbing ?
-                                                    {{applicationID.evaluationPoints.plumbing}}
+                                                <div class="col-6 my-2">
+                                                    Rate the quality of plumbing in your PTJ.
+                                                    <span
+                                                        class="answer-2 border border-primary mx-2 p-1">{{applicationID.evaluationPoints.plumbing}}
+                                                    </span>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-6 my-2">
                                                     <input class="text-align-center" name="plumbing"
                                                         value="{{this.markEachElements.[5]}}">
                                                 </div>
-                                                <div class="col-6">
-                                                    Rating for accomodation ?
-                                                    {{applicationID.evaluationPoints.accomodation}}
+                                                <div class="col-6 my-2">
+                                                    Rate the quality of accomodation in your PTJ.
+                                                    <span
+                                                        class="answer-2 border border-primary mx-2 p-1">{{applicationID.evaluationPoints.accomodation}}
+                                                    </span>
                                                 </div>
-                                                <div class="col-6">
-                                                    <input name="accomodation"
-                                                        value="{{this.markEachElements.[6]}}">
+                                                <div class="col-6 my-2">
+                                                    <input name="accomodation" value="{{this.markEachElements.[6]}}">
                                                 </div>
                                             </span>
                                         </div>
@@ -141,19 +157,25 @@
                                             <small class="text-bold mb-0" style="text-decoration: underline;"> Rate as :
                                                 "Very Bad"|
                                                 "Bad"| "Ok"| "Good"| "Excellent" </small>
-                                            <span class="row list-group-item list-group-item-sm py-3 d-flex">
-                                                <div class="col-6">
-                                                    Cooperation of staff ?
-                                                    {{applicationID.evaluationPoints.staff}}
+
+                                            <span class="row list-group-item list-group-item-sm-2 pt-5 d-flex">
+                                                <div class="col-6 my-2">
+                                                    Rate the quality of furniture in your PTJ.
+                                                    <span
+                                                        class="answer-2 border border-primary mx-2 p-1">{{applicationID.evaluationPoints.staff}}
+                                                    </span>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-6 my-2">
                                                     <input name="staff" value="{{this.markEachElements.[7]}}">
                                                 </div>
-                                                <div class="col-6">
-                                                    Authority of staff ?
-                                                    {{applicationID.evaluationPoints.authority}}
+                                                <div class="col-6 my-2">
+                                                    Rate the quality of furnishings (ceilings/floor/paint) in your
+                                                    PTJ.
+                                                    <span
+                                                        class="answer-2 border border-primary mx-2 p-1">{{applicationID.evaluationPoints.authority}}
+                                                    </span>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-6 my-2">
                                                     <input class="text-align-center" name="authority"
                                                         value="{{this.markEachElements.[8]}}">
                                                 </div>
@@ -161,15 +183,16 @@
                                         </div>
 
                                     </div>
-                                    <button type="submit" class="my-3">
+                                    <button type="submit btn btn-primary rounded-pill" class="my-3">
                                         Submit
                                     </button>
                                     <script>
                                         function showTabPane(event) {
                                             let href = event.target.getAttribute('href')
-                                            console.log({ classList: event.target.classList })
                                             let tabs = document.querySelector('.tabsCustom')
+                                            console.log({ classList: event.target.classList, tabs, href })
                                             for (element of Array.from(tabs.children)) {
+                                                console.log({element})
                                                 if (!element.classList.contains('d-none')) element.classList.add('d-none')
                                             }
                                             document.querySelector(href).classList.remove('d-none')

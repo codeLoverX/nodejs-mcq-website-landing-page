@@ -10,7 +10,6 @@ const CompetitionSchema = new mongoose_1.Schema({
     endDate: { type: Date, get: dateFormat_1.taskDate },
     invitation: String,
     programID: String,
-    programName: String,
     startDate: { type: Date, get: dateFormat_1.taskDate },
     _id: String
 }, 

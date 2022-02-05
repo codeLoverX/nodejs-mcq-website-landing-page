@@ -30,6 +30,7 @@ app.engine('handlebars', exphbs({
 app.engine('handlebars', exphbs({
     helpers: {
         math: handlebarsConfig_1.addPlusToHandleBars,
+        json: (content) => JSON.stringify(content)
     }
 }));
 app.use(express.static(join(__dirname, 'public')));
@@ -39,5 +40,6 @@ organizerController(app);
 judgeController(app);
 (0, db_1.connectDB)();
 app.listen(process.env.PORT || 5000, function () {
+    console.log("Started");
 });
 module.exports = app;

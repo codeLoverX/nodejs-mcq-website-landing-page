@@ -27,7 +27,7 @@ module.exports = function (app: Application) {
     app.get('/all-applications-judge', auth, async (req: Request, res: Response, next: NextFunction) => {
         
         let application: Array< ApplicationInterface & {formLabel: typeof formLabel} >  = await ApplicationMongoose.find({}).lean()
-        let evaluation = await EvaluationMongoose.find({judgeID: req.session.user._id, applicationStatus: 'approved'}).populate('applicationID').lean()
+        let evaluation = await EvaluationMongoose.find({judgeID: req.session.user._id).populate('applicationID').lean()
         // res.json({evaluation})
         for (let i=0; i < application.length; i++) {
             application[i].formLabel = formLabel

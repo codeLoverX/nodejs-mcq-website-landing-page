@@ -4,8 +4,8 @@ const dotenv =  require("dotenv")
 const path =join(__dirname, '../env/config.env')
 dotenv.config({ path })
 
-// let connectionString : string = "mongodb://localhost:27017/exampleDb"
-let connectionString : string = process.env.DB_CONNECTION as any as string
+let connectionString : string = "mongodb://localhost:27017/exampleDb"
+// let connectionString : string = process.env.DB_CONNECTION as any as string
 async function connectDB(): Promise<void> {
   try {
     await connect(connectionString, {

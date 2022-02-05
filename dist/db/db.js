@@ -15,8 +15,8 @@ const { join } = require('path');
 const dotenv = require("dotenv");
 const path = join(__dirname, '../env/config.env');
 dotenv.config({ path });
-// let connectionString : string = "mongodb://localhost:27017/exampleDb"
-let connectionString = process.env.DB_CONNECTION;
+let connectionString = "mongodb://localhost:27017/exampleDb";
+// let connectionString : string = process.env.DB_CONNECTION as any as string
 function connectDB() {
     return __awaiter(this, void 0, void 0, function* () {
         try {

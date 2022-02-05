@@ -17,30 +17,6 @@ const auth_1 = require("../middleware/auth");
 const methodOverride = require('method-override');
 const keyRename_1 = require("../helpers/keyRename");
 const formLables_1 = require("../db/formLables");
-class Condition {
-    constructor(signedIn, completeApplication, completeProof) {
-        this.signedIn = signedIn;
-        this.completeApplication = completeApplication;
-        this.completeProof = completeProof;
-    }
-    get fullTable() {
-        return [this.signedIn, this.completeApplication, this.completeProof];
-    }
-    isSignedIn(req) {
-        this.signedIn = req.session.user !== null;
-        return this.signedIn;
-    }
-    isCompleteApplication(application) {
-        if (application)
-            this.completeApplication = application.applicationStatus !== "Started";
-        return this.completeApplication;
-    }
-    isCompleteProof(application) {
-        if (application)
-            this.completeProof = application.proof !== null;
-        return this.completeProof;
-    }
-}
 module.exports = function (app) {
     let nav = [
         { name: "Profile", url: "/home-organizer" },
@@ -79,6 +55,30 @@ module.exports = function (app) {
             staffName: encodeURIComponent(JSON.stringify(staffName))
         });
     }));
+    class Condition {
+        constructor(signedIn, completeApplication, completeProof) {
+            this.signedIn = signedIn;
+            this.completeApplication = completeApplication;
+            this.completeProof = completeProof;
+        }
+        get fullTable() {
+            return [this.signedIn, this.completeApplication, this.completeProof];
+        }
+        isSignedIn(req) {
+            this.signedIn = req.session.user !== null;
+            return this.signedIn;
+        }
+        isCompleteApplication(application) {
+            if (application)
+                this.completeApplication = application.applicationStatus !== "Started";
+            return this.completeApplication;
+        }
+        isCompleteProof(application) {
+            if (application)
+                this.completeProof = application.proof !== null;
+            return this.completeProof;
+        }
+    }
     app.post('/edit-application/:id', auth_1.auth, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
         let application = new Application_1.ApplicationMongoose();
         function reject(id) {
@@ -89,7 +89,7 @@ module.exports = function (app) {
         }
         function accept(id) {
             return __awaiter(this, void 0, void 0, function* () {
-                let application = yield Application_1.ApplicationMongoose.findByIdAndUpdate(id, { applicationStatus: 'accepted' });
+                let application = yield Application_1.ApplicationMongoose.findByIdAndUpdate(id, { applicationStatus: 'approved' });
                 return application;
             });
         }

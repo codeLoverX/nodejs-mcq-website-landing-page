@@ -87,7 +87,7 @@ module.exports = function (app: Application) {
             return application
         }
         async function accept(id: string) {
-            let application = await ApplicationMongoose.findByIdAndUpdate(id, { applicationStatus: 'accepted' })
+            let application = await ApplicationMongoose.findByIdAndUpdate(id, { applicationStatus: 'approved' })
             return application
         }
         if (req.body.status === "reject") application = await reject(req.params.id)

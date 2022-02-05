@@ -8,32 +8,6 @@ const methodOverride = require('method-override');
 import { keyRenameObject } from "../helpers/keyRename";
 import { formLabel } from "../db/formLables";
 
-class Condition {
-    signedIn: boolean
-    completeApplication: boolean
-    completeProof: boolean
-    constructor(signedIn: boolean, completeApplication: boolean, completeProof: boolean) {
-        this.signedIn = signedIn
-        this.completeApplication = completeApplication
-        this.completeProof = completeProof
-    }
-    get fullTable(): Array<boolean> {
-        return [this.signedIn, this.completeApplication, this.completeProof]
-    }
-    isSignedIn(req: Request) {
-        this.signedIn = req.session.user !== null
-        return this.signedIn
-    }
-    isCompleteApplication(application: ApplicationInterface | null) {
-        if (application) this.completeApplication = application.applicationStatus !== "Started"
-        return this.completeApplication
-    }
-    isCompleteProof(application: ApplicationInterface | null) {
-        if (application) this.completeProof = application.proof !== null
-        return this.completeProof
-    }
-
-}
 
 module.exports = function (app: Application) {
 
@@ -80,6 +54,32 @@ module.exports = function (app: Application) {
     });
 
 
+    class Condition {
+        signedIn: boolean
+        completeApplication: boolean
+        completeProof: boolean
+        constructor(signedIn: boolean, completeApplication: boolean, completeProof: boolean) {
+            this.signedIn = signedIn
+            this.completeApplication = completeApplication
+            this.completeProof = completeProof
+        }
+        get fullTable(): Array<boolean> {
+            return [this.signedIn, this.completeApplication, this.completeProof]
+        }
+        isSignedIn(req: Request) {
+            this.signedIn = req.session.user !== null
+            return this.signedIn
+        }
+        isCompleteApplication(application: ApplicationInterface | null) {
+            if (application) this.completeApplication = application.applicationStatus !== "Started"
+            return this.completeApplication
+        }
+        isCompleteProof(application: ApplicationInterface | null) {
+            if (application) this.completeProof = application.proof !== null
+            return this.completeProof
+        }
+    
+    }
     app.post('/edit-application/:id', auth, async (req: Request, res: Response, next: NextFunction) => {
         let application: ApplicationInterface | null = new ApplicationMongoose()
         async function reject(id: string) {

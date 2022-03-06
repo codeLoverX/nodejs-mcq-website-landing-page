@@ -11,7 +11,7 @@ module.exports = function (app: Application) {
         res.render('landing');
     })
     app.get('/login', (req: Request, res: Response, next: NextFunction) => {
-        res.render('login');
+        res.render('login-demo');
     })
     app.get('/login-demo', (req: Request, res: Response, next: NextFunction) => {
         res.render('login-demo');

@@ -8,7 +8,6 @@ Tools: Typescritpt, MongoDB, Node.js, EJS template engine, Bootstrap, AWS image 
 
 Npm libraries and concepts: multer, AWS upload images, sessions, authentication, middleware
 
-![5](https://user-images.githubusercontent.com/52366079/163014861-9941b4c0-d33a-41c2-911e-f200083340e8.png)
 
 ![1](https://user-images.githubusercontent.com/52366079/163014837-ba4b5589-a7ee-490e-887b-e162968996a8.png)
 ![2](https://user-images.githubusercontent.com/52366079/163014847-8a88b826-f4d3-4bc2-bef1-1ba206d470af.png)

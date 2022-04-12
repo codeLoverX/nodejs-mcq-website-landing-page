@@ -4,7 +4,7 @@ Entire project done in 5 days. Rapid development!
 
 View here: https://green-leaf-system.herokuapp.com/
 
-Tools: Node.js, EJS template engine, Bootstrap, AWS image upload
+Tools: Typescritpt, MongoDB, Node.js, EJS template engine, Bootstrap, AWS image upload
 
 Npm libraries and concepts: multer, AWS upload images, sessions, authentication, middleware
 

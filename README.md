@@ -2,7 +2,7 @@
 
 Entire project done in 5 days. Rapid development!
 
-View here: https://green-leaf-system.herokuapp.com/proof-participant
+View here: https://green-leaf-system.herokuapp.com/
 
 Tools: Node.js, EJS template engine, Bootstrap, AWS image upload
 
